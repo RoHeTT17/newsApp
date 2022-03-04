@@ -1,6 +1,7 @@
 //Pantalla que contendra la referencia a los tabs
 
 import 'package:appnews/src/pages/tab1_page.dart';
+import 'package:appnews/src/pages/tab2_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,47 +15,6 @@ class TabsPage extends StatelessWidget {
         body: _Tabs(),
         bottomNavigationBar: _NavigationBar(),
       ),
-    );
-  }
-}
-
-class _NavigationBar extends StatelessWidget {
-  const _NavigationBar({  Key? key,}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-
-    final tabProvider = Provider.of<_NavegationModel>(context);
-
-    return BottomNavigationBar(
-      currentIndex: tabProvider.getActualPage,
-      onTap: (index) => tabProvider.setActualPage = index,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Para ti'),
-        BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Encabezados'),
-      ]
-    );
-  }
-}
-
-class _Tabs extends StatelessWidget {
-  const _Tabs({  Key? key,}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    
-    final _tabProvider = Provider.of<_NavegationModel>(context);
-    
-    return PageView(
-      // physics: BouncingScrollPhysics(),
-      //Bloquear que no pueda cambiar entre pantallas con el scroll
-      physics: const NeverScrollableScrollPhysics(),
-      controller: _tabProvider.getPageController,
-      children: [
-          Tab1Screen(),
-          Container(color: Colors.green,)
-    
-      ],
     );
   }
 }
@@ -81,6 +41,45 @@ class _NavegationModel extends ChangeNotifier{
 
   PageController get getPageController => this._pageController;
 
+}
 
+class _Tabs extends StatelessWidget {
+  const _Tabs({  Key? key,}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    
+    final _tabProvider = Provider.of<_NavegationModel>(context);
+    
+    return PageView(
+      // physics: BouncingScrollPhysics(),
+      //Bloquear que no pueda cambiar entre pantallas con el scroll
+      physics: const NeverScrollableScrollPhysics(),
+      controller: _tabProvider.getPageController,
+      children: [
+          Tab1Screen(),
+          Tab2Screen()
+          // Container(color: Colors.green,)
+      ],
+    );
+  }
+}
+
+class _NavigationBar extends StatelessWidget {
+  const _NavigationBar({  Key? key,}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    final tabProvider = Provider.of<_NavegationModel>(context);
+
+    return BottomNavigationBar(
+      currentIndex: tabProvider.getActualPage,
+      onTap: (index) => tabProvider.setActualPage = index,
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Para ti'),
+        BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Encabezados'),
+      ]
+    );
+  }
 }

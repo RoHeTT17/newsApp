@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:appnews/src/models/newsModels.dart';
 import 'package:http/http.dart' as http;
 
-final _URL_BASE = 'https://newsapi.org/v2';
-final _API = '18544e37314b47369a008d3b57eb0d85';
+const _URL_BASE = 'https://newsapi.org/v2';
+const _API = '18544e37314b47369a008d3b57eb0d85';
 
 class NewsService with ChangeNotifier{
 
@@ -21,7 +21,7 @@ class NewsService with ChangeNotifier{
   getTopHeadLines() async{
     //url del End point
 
-    final url = '$_URL_BASE/top-headlines?apiKey=$_API&country=mx';
+    const url = '$_URL_BASE/top-headlines?apiKey=$_API&country=mx';
 
     /*
     Otra manera
